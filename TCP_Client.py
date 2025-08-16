@@ -3,19 +3,19 @@ import socket
 def tcp_client():
     client_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     client_socket.connect(('127.0.0.1', 5000))
-    print("============================")
-    print("Conectado al servidor TCP...")
-    print("============================\n")
+    print("==========================================")
+    print("YOU ARE CONNECTED TO THE SERVER TCP...")
+    print("==========================================\n")
 
     while True:
-        mensaje=input("Ingrese el mensaje para enviar al servidor (o 'DESCONEXION' para salir):\n")
+        mensaje=input("INPUT A MESSAGE TO THE SERVER ('DISCONNECTED' TO CLOSE COMMUNICATION):\n")
         client_socket.sendall(mensaje.encode())
-        if mensaje.strip()=="DESCONEXION":
+        if mensaje.strip()=="DISCONNECT":
             client_socket.close()
-            print("Conexion cerrada...")
-            print("Desconectando del servidor....")
+            print("CLOSE CONNECTION...")
+            print("COMMUNICATION WITH THE SERVER WAS DISCONNECTED....")
             break
-        respuesta=client_socket.recv(1024).decode()
-        print(f"Respuesta del servidor: {respuesta}")
+        respuesta=client_socket.recv(1024).decode().strip()
+        print(f"SERVER ANSWER: {respuesta}")
 
 tcp_client()
