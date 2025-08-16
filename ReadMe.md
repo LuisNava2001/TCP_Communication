@@ -1,36 +1,91 @@
-# Proyecto de Comunicación TCP
+# TCP Communication Project
 
-Este proyecto implementa un servidor y un cliente que se comunican entre sí a través de una conexión TCP/IP en la misma máquina (localhost). El servidor y el cliente están escritos en Python, y los archivos `.bat` proporcionan una forma sencilla de ejecutar ambos programas en sistemas Windows.
+This project implements a TCP server and client that communicate with each other on the same machine (localhost). The server supports multiple clients simultaneously using threads, and each client can send messages, receive responses, and disconnect gracefully with the `DISCONNECT` command.
 
-## Requisitos
+## Requirements
 
-- Python 3.x instalado en tu máquina.
-- Archivos `.bat` para ejecutar el servidor y el cliente fácilmente.
+- Python 3.x installed on your machine.
 
-## Archivos incluidos
+## Included Files
 
-- `server.py`: El servidor TCP que espera conexiones de clientes.
-- `client.py`: El cliente TCP que se conecta al servidor y envía mensajes.
-- `Run_Server.bat`: Script de Windows para ejecutar el servidor.
-- `Run_Client.bat`: Script de Windows para ejecutar el cliente.
+- `server.py`: The TCP server that waits for client connections.
+- `client.py`: The TCP client that connects to the server and sends messages.
+- `Run_Server.bat`: Optional script to run the server on Windows.
+- `Run_Client.bat`: Optional script to run the client on Windows.
 
-## Instrucciones para usar
+## How to Use
 
-### 1. Preparativos iniciales
-Asegúrate de tener Python instalado en tu sistema. Si no lo tienes, puedes descargarlo desde [aquí](https://www.python.org/downloads/).
+### 1. Initial Setup
+Make sure Python is installed on your system. If not, you can download it from [python.org](https://www.python.org/downloads/).
 
-### 2. Ejecutar el Servidor
-1. Abre una terminal o ventana de comandos.
-2. Navega a la carpeta donde tienes los archivos `Server.py` y `Run_Server.bat`.
-3. Ejecuta el archivo `Run_Server.bat` haciendo doble clic sobre él. Esto iniciará el servidor TCP, que estará esperando conexiones en el puerto `5000` en `localhost`.
-4. Una vez iniciado, el servidor mostrará un mensaje similar a este: `Servidor TCP en espera de conexiones en localhost:5000...`
+### 2. Run the Server
+1. Open a terminal or command prompt.
+2. Navigate to the folder containing `server.py` and `Run_Server.bat`.
+3. Run the server with:
 
-### 3. Ejecutar el Cliente
-1. Abre una terminal o ventana de comandos.
-2. Navega a la carpeta donde tienes los archivos `Client.py` y `Run_Client.bat`.
-3. El cliente pedirá que ingreses un mensaje para enviar al servidor: `Ingrese el mensaje a enviar al servidor (o 'DESCONEXION' para salir):`
+## python server.py
 
-## Ejemplo de ejecución
+or using the Window script:
 
+## Run_Server.bat
 
+4. The server will start listening for connections on port `5000` at `localhost`.
 
+### 3. Run the Client
+1. Open another terminal or command prompt.
+2. Navigate to the folder containing `client.py` and `Run_Client.bat`.
+3. Run the client with:
+
+## python client.py
+
+or using the Window script:
+
+## Run_Client.bat
+
+4. The client will ask you to enter a message to send to the server:  
+`Enter the message to send to the server (or 'DISCONNECT' to exit):`
+5. To close the connection, type `DISCONNECT`.
+
+## Example Execution
+
+**Server**
+
+```
+========================================================
+[SERVER] LISTENING ON localhost::5000...
+========================================================
+
+[NEW CONNECTION] ('127.0.0.1', 50532)
+CLIENT ('127.0.0.1', 50532): hello
+CLIENT ('127.0.0.1', 50532): disconnect
+[CLOSED CONNECTION] ('127.0.0.1', 50532)
+```
+
+**Client**
+
+```
+============================
+YOU ARE CONNECTED TO THE SERVER TCP...
+============================
+
+INPUT A MESSAGE TO THE SERVER ('DISCONNECT' TO CLOSE COMMUNICATION):
+hello
+SERVER ANSWER: HELLO
+
+INPUT A MESSAGE TO THE SERVER ('DISCONNECT' TO CLOSE COMMUNICATION):
+disconnect
+SERVER ANSWER: CLOSING CONNECTION...
+CLOSE CONNECTION...
+COMMUNICATION WITH THE SERVER WAS DISCONNECTED....
+```
+
+---
+
+## Author
+
+### Luis Nava | [LuisNava2001](https://github.com/LuisNava2001)
+
+> I'm exploring and sharing practical Python projects to simplify daily tasks.  
+> Feel free to fork this repo, suggest improvements, or open issues!
+
+---
