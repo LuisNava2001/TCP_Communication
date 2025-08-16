@@ -79,6 +79,39 @@ CLOSE CONNECTION...
 COMMUNICATION WITH THE SERVER WAS DISCONNECTED....
 ```
 
+```mermaid
+graph TD
+    subgraph Clients
+        C1[Client 1]
+        C2[Client 2]
+        C3[Client 3]
+    end
+
+    subgraph Server
+        S[Server TCP]
+    end
+
+    C1 -->|Connect| S
+    C2 -->|Connect| S
+    C3 -->|Connect| S
+
+    C1 -->|Send message| S
+    C2 -->|Send message| S
+    C3 -->|Send message| S
+
+    S -->|Respond with uppercase message| C1
+    S -->|Respond with uppercase message| C2
+    S -->|Respond with uppercase message| C3
+
+    C1 -->|DISCONNECT| S
+    C2 -->|DISCONNECT| S
+    C3 -->|DISCONNECT| S
+
+    S -->|Close connection| C1
+    S -->|Close connection| C2
+    S -->|Close connection| C3
+```
+
 ---
 
 ## Author
@@ -89,3 +122,4 @@ COMMUNICATION WITH THE SERVER WAS DISCONNECTED....
 > Feel free to fork this repo, suggest improvements, or open issues!
 
 ---
+
