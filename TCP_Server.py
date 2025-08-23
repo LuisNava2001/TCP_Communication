@@ -1,7 +1,13 @@
 import socket
 import threading
 import logging
+import os
 from datetime import datetime
+
+def setup_terminal(title="TCP_SERVER", width=100, height=100):
+    os.system("color 0A")
+    os.system(f"title {title}")
+    os.system(f"mode con: cols={width} lines={height}")
 
 def handle_client(conn, address_client, client_id):
     log_filename = f"client_{client_id}_{datetime.now().strftime('%Y%m%d_%H%M%S')}.log"
@@ -26,9 +32,12 @@ def handle_client(conn, address_client, client_id):
                 conn.sendall("CLOSING CONNECTION...".encode())
                 break
             else:   
-                if "como estas" in datos:
-                    datos = "Muy bien, gracias por preguntar, y tu?"
+                if "how are you" in datos.casefold() or 'how have you been' in datos.casefold():
+                    datos = "I'm so good, thank you for ask!"
+                elif "xd" in datos.casefold():
+                    datos = "It's funny right xdd!"
                 conn.sendall(datos.upper().encode())
+                logger.info(f'SERVER: {datos}')
         except ConnectionResetError:
             print(f"[ERROR] CLIENT {address_client} DISCONNECTED UNEXPECTEDLY.")
             break
@@ -40,6 +49,7 @@ def handle_client(conn, address_client, client_id):
     print(f"[CLOSED CONNECTION] {address_client}")
 
 def tcp_server():
+    setup_terminal(title="TCP SERVER", width=100, height=100)
     server_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     server_socket.bind(('127.0.0.1', 5000))
     server_socket.listen(5)
